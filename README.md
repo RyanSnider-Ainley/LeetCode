@@ -1,2 +1,3 @@
 # LeetCode
-Solved LeetCode problems
+
+How I approached and solved each LeetCode problem.
