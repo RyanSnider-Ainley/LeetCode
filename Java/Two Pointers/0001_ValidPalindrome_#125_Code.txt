@@ -1,0 +1,42 @@
+class Solution {
+    public boolean isPalindrome(String s) {
+        // the string is a palindrome if it has one or less characters
+        if( s.length() <= 1 ) return true;
+
+        // create two pointers, one for the start of the string and one for the end of the string
+        int start = 0;
+        int end = s.length() - 1;
+
+        // iterate through the string checking both sides
+        while( start < end ) {
+            // create two characters to compare, one representing the start of the string
+            // and one representing the end of the string
+            char left = s.charAt( start );
+            char right = s.charAt( end );
+
+            // check if the left character is a letter or digit, if not increment left
+            if( !Character.isLetterOrDigit( left ) ) {
+                left++; 
+                continue;
+            }
+
+            // check if the right character is a letter or digit, it not decrement right
+            if( !Character.isLetterOrDigit( right ) ) {
+                right--;
+                continue;
+            }
+
+            // compare the lowercase version of the left and right charcter, this will not impact digits
+            // if the characters do not match, the string is not a palindrome, so return false
+            if( Character.toLowerCase( left ) != Character.toLowerCase( right ) ) return false;
+
+            // increment start and decrement end to check the next characters
+            start++;
+            end--;
+        }
+
+        // when the while loop has completed, all the characters match, so return true
+        return true; 
+
+    }
+}
