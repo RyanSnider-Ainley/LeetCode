@@ -1,3 +1,3 @@
 # LeetCode
 
-How I approached and solved each LeetCode problem.
+How I approached and solved each LeetCode problem including code.
