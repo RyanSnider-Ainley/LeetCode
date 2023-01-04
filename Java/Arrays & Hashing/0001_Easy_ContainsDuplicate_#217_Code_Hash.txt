@@ -1,0 +1,22 @@
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+      
+        // initialize a hashset
+        HashSet<Integer> set = new HashSet<>();
+
+        // iterate through the array
+        for( int i = 0; i < nums.length; i++ ) {
+            
+            // check if the current element exists in the array, if yes return true
+            // check before adding to the hashset to prevent a false true from the current element
+            if( set.contains( nums[i] ) ) return true;
+            
+            // add the element to the hashset
+            set.add( nums[i] );
+        }
+
+        // if no duplicates are found, return false;
+        return false;
+
+    }
+}
