@@ -1,0 +1,31 @@
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+
+        // set an integer called low equal to the first index of the array
+        int low = 0;
+
+        // set an integer called high equal to the last index of the array 
+        int high = numbers.length - 1;
+
+        // loop through the array while low is less than high
+        while( low < high ) {
+
+            // create an integer called sum that adds low and high
+            int sum = numbers[low] + numbers[high];
+
+            // if the sum equals the target, return low plus one and high plus one
+            if( sum == target )
+                return new int[] {low + 1, high + 1};
+            
+            // else if the sum is less than the target, increase low by one (moving the pointer to the right)
+            else if( sum < target )
+                low++;
+            // else if the sum is greater than the target, decrease high by one (moving the pointer to the left)
+            else 
+                high--;
+        }       
+
+        // after the loop is complete, if no solution is found, return null    
+        return null;
+    }
+}
