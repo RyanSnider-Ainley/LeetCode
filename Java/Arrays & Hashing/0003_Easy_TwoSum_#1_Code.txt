@@ -1,0 +1,22 @@
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        // create a hashmap to store the elements of the array
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        // iterate through the array to add it to the hashmap
+        for( int i = 0; i < nums.length; i++ ) {
+            // create an integer to check for the corresponding number that adds to target
+            int complement = target - nums[i];
+            
+            // if the complement is found, return the current position and position of the corresponding number
+            if( map.containsKey( complement ) ) return new int[] { i, map.get(complement) };
+
+            // add the current value and its position to the map
+            map.put( nums[i], i );
+        }
+
+        // if no matches are found, return null
+        return null;
+
+    }
+}
