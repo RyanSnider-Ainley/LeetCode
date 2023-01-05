@@ -1,0 +1,47 @@
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        // sort the array
+        Arrays.sort( nums );  
+
+        // create a list of lists to hold the triplets
+        List<List<Integer>> results = new ArrayList<>();
+
+        // iterate through the array for each element that is less than or equal to zero
+        for( int i = 0; i < nums.length && nums[i] <= 0; ++i) {
+            // run the method to start or if the previous element is different
+            if( i == 0 || nums[i - 1] != nums[i] )
+                twoSumII( nums, i, results );
+        }
+        // return the list
+        return results;
+    }
+
+    // create a method to iterate through the array
+    void twoSumII( int[] nums, int i, List<List<Integer>> results ) {
+        // create two pointers, a low that is to the left of the current position
+        // and a high that is at the end of the array 
+        int low = i + 1, high = nums.length - 1;
+
+        // while low is less than high
+        while( low < high ) {
+            // create an integer that sums the values of current, low, and high
+            int sum = nums[i] + nums[low] + nums[high];
+
+            // if the sum is less than zero, increment low by one
+            if( sum < 0 ) low++;
+            
+            // else if the sum is greater than zero, decrement high by one
+            else if( sum > 0 ) high--;
+
+            // else add the index of current, low, and high to a list and add it to the master list
+            else {
+                // the rest of the array still needs to be searched, so increment low and decrement high
+                results.add( Arrays.asList( nums[i], nums[low++], nums[high--] ) );
+                
+                // while low is less than high and the current value of low is the same as the previous value,
+                // move to the next low
+                while( low < high && nums[low] == nums[low - 1] ) low++;
+            }            
+        }
+    }
+}
