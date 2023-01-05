@@ -1,0 +1,56 @@
+Array:
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        
+        // check if the strings are equal in size
+        if( s.length() != t.length() ) return false;
+
+        // create a bucket array to count the characters of each strings
+        // there are 26 letters in the English alphabet
+        int[] bucket = new int[26];    
+
+        // iterate through each string simultaneously
+        for( int i = 0; i < s.length(); i++ ) {
+            // add the count of the  first string's letters to the corresponding bucket
+            bucket[ s.charAt(i) - 'a' ]++;
+
+            // subtract the count of the second string's letters to the corresponding bucket
+            bucket[ t.charAt(i) - 'a' ]--;
+        }
+        // iterate through the bucket array, if a bucket contains a value, reutrn false;
+        for( int i : bucket ) if( i != 0 ) return false;
+
+        // if the bucket array contains all zeroes, the strings are anagrams, return true
+        return true; 
+    }
+}
+
+====================================================================================================
+
+HashMap:
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        
+        // check if the strings are equal in size
+        if( s.length() != t.length() ) return false;
+
+        // create a hashmap to count the characters of each strings
+        HashMap<Character, Integer> bucket = new HashMap<>();
+
+        // iterate through each string simultaneously
+        for( int i = 0; i < s.length(); i++ ) {
+            // add the count of the  first string's letters to the corresponding bucket
+            bucket.put( s.charAt(i), bucket.getOrDefault(s.charAt(i),0)+1);
+
+            // subtract the count of the second string's letters to the corresponding bucket
+            bucket.put(t.charAt(i), bucket.getOrDefault(t.charAt(i),0)-1);
+        }
+        // iterate through the bucket array, if a bucket contains a value, reutrn false;
+        for( char c : bucket.keySet() ) if( bucket.get(c) != 0 ) return false;
+
+        // if the bucket contains all zeroes, the strings are anagrams, return true
+        return true; 
+    }
+}
