@@ -1,0 +1,24 @@
+class Solution {
+    public boolean isValid(String s) {
+        // check if the string length is even, return false if not
+        if( s.length() % 2 != 0 ) return false;
+
+        // create a stack to hold characters
+        Stack<Character> stack = new Stack<>();
+
+        // transform the string into a character array and iterate through interface
+        for( char c : s.toCharArray() ) {
+            // for each opening character, push the closing character onto the stack
+            if( c == '(' ) stack.push( ')' );
+            else if( c == '[' ) stack.push( ']' );
+            else if( c == '{' ) stack.push( '}' );
+            
+            // if no opening characters are found, or a closing character 
+            //does not match when popped return false
+            else if( stack.isEmpty() == true || stack.pop() != c ) return false;
+        
+        }
+        // return if the stack is empty
+        return stack.isEmpty();    
+    }
+}
