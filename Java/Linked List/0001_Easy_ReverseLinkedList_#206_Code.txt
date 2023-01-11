@@ -1,0 +1,78 @@
+Iterative
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        // create a node called reversed for the start of the reversed list
+        ListNode reversed = null;
+
+        // create a node called current to iterate through the list and 
+        // set it to point to the start of the orgininal list
+        ListNode current = head;
+
+        // while the end of the original list hasn't been reached
+        while( current != null ) {
+            // create a temporary node to point the node after current to be used as a place holder
+            ListNode temporary = current.next;
+            
+            // set the next node of the current node to point to reverse
+            // this builds the list backwords starting with the head of the current list
+            // the orgininal list is now saved on the temporary node
+            current.next = reversed;            
+
+            // set the reversed node to point to current to move backwards in the list
+            reversed = current;
+
+            // set the current node to point to the temporary node to move backwards again in the list
+            current = temporary;
+        }
+
+        return reversed;
+    }
+}
+
+====================================================================================================================
+
+Recursive
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        // establish a base case, if the current head or next ListNode
+        // is null, return head
+        if( head == null || head.next == null ) return head;
+
+        // create a new ListNode called reversed to call the reverseList function
+        // with the input value as the node after head
+        ListNode reversed = reverseList( head.next );
+
+        // set the next, next, value of head to head
+        head.next.next = head;
+
+        // set the next value of head to null
+        head.next = null;
+
+        // return the head of the reversed list
+        return reversed;
+
+
+    }
+}
