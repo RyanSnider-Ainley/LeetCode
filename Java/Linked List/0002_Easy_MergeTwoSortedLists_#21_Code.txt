@@ -1,0 +1,94 @@
+Iterative
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        // create a node to mark the head of the merged list    
+        ListNode preHead = new ListNode(-1);
+
+        // create a dummy node to start the merged list
+        ListNode prev = preHead;
+
+        // While list 1 and list 2 are not finished
+        while( list1 != null && list2 != null ) {
+            // if the current node of list 1 is less than the current node of list 2
+            if( list1.val < list2.val ) {
+                // add the current node of list 1 to the merged list
+                prev.next = list1;
+
+                // iterate to the next node in list 1
+                list1 = list1.next;
+            }
+            // else (the current node of list 2 is less than the current node of list 1)
+            else {
+                // add the current node of list 2 to the merged list
+                prev.next = list2;
+
+                // iterate to the next node in list 2
+                list2 = list2.next;
+            }
+
+            // iterate to the next node in the merged list
+            prev = prev.next;
+        }
+
+        // add the remaining nodes in the longer list to the merged list
+        prev.next = list1 == null ? list2 : list1;
+
+        // return the head of the merged list
+        return preHead.next;
+
+
+    }
+}
+
+===============================================================================================================
+
+recursive
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        // define the base case as when list 1 is null, return list 2
+        if( list1 == null ) return list2;
+
+        // if list 2 is null, return list 1
+        else if( list2 == null ) return list1;
+
+        // if the current node of list 1 is less than the current node of list 2,
+        // call the function iterating to the next node in list 1,
+        // and return the current node of list 1
+        else if( list1.val < list2.val ) {
+            list1.next = mergeTwoLists( list1.next, list2 );
+            return list1;
+        }
+
+        // if the current node of list 2 is less than the current node of list 1,
+        // call the function iterating to the next node in list 2,
+        // and return the current node of list 2
+        else {
+            list2.next = mergeTwoLists( list1, list2.next );
+            return list2;
+        }
+
+            
+    }
+}
